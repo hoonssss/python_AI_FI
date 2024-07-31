@@ -11,5 +11,5 @@ cancer = load_breast_cancer();
 df_cancer = pd.DataFrame(np.c_[cancer["data"], cancer["target"]], columns=np.append(cancer["feature_names"], ["target"]));
 
 plt.figure(figsize=(20,10));
-sns.heatmap(df_cancer.corr()) #.corr 상관관계
+sns.heatmap(df_cancer.corr(), annot = True) #.corr 상관관계
 plt.show();
