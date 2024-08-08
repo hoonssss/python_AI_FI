@@ -28,6 +28,7 @@ print(stock_daily_return);
 # Date 컬럼 제거
 cm = stock_daily_return.drop(columns=["Date"]).corr();
 print(cm)
+#heatmap
 plt.figure(figsize=(10,10));
 sns.heatmap(cm, annot = True);
 plt.show();

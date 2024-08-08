@@ -27,6 +27,10 @@ def daily_return(df):
 # 일일 수익률 계산
 stock_daily_return = daily_return(sorting_result);
 
+#plt
+stock_daily_return.hist(figsize=(10,10), bins=40);
+plt.show();
+
 df_hist = stock_daily_return.copy();
 df_hist = df_hist.drop(columns=["Date"]);
 data = [];
@@ -35,5 +39,6 @@ for i in df_hist.columns:
 
 print(data);
 
+#plotly
 fig = ff.create_distplot(data, df_hist.columns);
 fig.show();

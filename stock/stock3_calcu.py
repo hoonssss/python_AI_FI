@@ -22,12 +22,6 @@ def daily_return(df):
         df_daily_return.loc[0, i] = 0  # 첫 번째 행의 값은 0으로 설정
     return df_daily_return 
 
-def show_plot(df, title):
-    df.plot(x = "Date", figsize=(15,7), linewidth = 3, title = title);
-    plt.grid();
-    plt.show();
-
-
 # 일일 수익률 계산
 stock_daily_return = daily_return(sorting_result)
 
@@ -35,6 +29,11 @@ stock_daily_return = daily_return(sorting_result)
 print(stock_daily_return)
 
 #matplotlib
+def show_plot(df, title):
+    df.plot(x = "Date", figsize=(15,7), linewidth = 3, title = title);
+    plt.grid();
+    plt.show();
+
 show_plot(stock_daily_return, "test")
 
 #plotly
