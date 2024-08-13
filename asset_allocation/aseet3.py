@@ -51,3 +51,7 @@ fig = px.line(x=df_portfolio["Date"], y=df_portfolio["return"], title="Portfolio
 fig.show()
 
 interactive_plot(df_portfolio.drop(columns=["portfolio daily worth in $", "return"]), "Portfolio Worth by Stock")
+
+#히스토그램
+fig = px.histogram(df_portfolio, x = "return");
+fig.show();
