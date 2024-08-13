@@ -1,5 +1,6 @@
-import numpy as np
 import pandas as pd
+import plotly.express as px
+import numpy as np
 
 # 데이터 불러오기
 data_url = pd.read_csv("/Users/yunjaehun/desktop/유데미/fi_ai/stock_16/stock.csv")
@@ -11,6 +12,13 @@ def normalize(df):
     for i in x.columns[1:]:
         x[i] = x[i] / x[i][0]
     return x
+
+# plotly 시각화 함수
+def interactive_plot(df, title):
+    fig = px.line(title=title)
+    for i in df.columns[1:]:
+        fig.add_scatter(x=df["Date"], y=df[i], name=i)
+    fig.show()
 
 # 포트폴리오 할당 함수
 def portfolio_allocation(df, weights):
@@ -37,3 +45,9 @@ weights = weights / np.sum(weights)
 # 포트폴리오 할당
 df_portfolio = portfolio_allocation(df, weights)
 print(df_portfolio)
+
+# 시각화
+fig = px.line(x=df_portfolio["Date"], y=df_portfolio["return"], title="Portfolio Returns")
+fig.show()
+
+interactive_plot(df_portfolio.drop(columns=["portfolio daily worth in $", "return"]), "Portfolio Worth by Stock")
