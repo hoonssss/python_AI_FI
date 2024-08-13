@@ -27,4 +27,5 @@ def interactive_plot(df, title):
         fig.add_scatter(x = df["Date"], y = df[i], name = i );
     fig.show();
 
+interactive_plot(stock_df, "test");
 interactive_plot(normalize(stock_df), "test");
