@@ -50,9 +50,26 @@ print("---------------------------------");
 # 기업 별 일 수익률
 print(stock_daily_return[["AAPL", "sp500"]]);
 print("---------------------------------");
-# plot
+
+#beta, alpha
 beta, alpha = np.polyfit(stock_daily_return["sp500"], stock_daily_return["AAPL"], 1);
 print("beta {}, alpha {}".format(beta,alpha));
-stock_daily_return.plot(kind = "scatter", x = "sp500", y = "AAPL");
-plt.plot(stock_daily_return["sp500"], beta * stock_daily_return["sp500"] + alpha, '-', color = 'r');
-plt.show();
+print("---------------------------------");
+
+# plot
+# stock_daily_return.plot(kind = "scatter", x = "sp500", y = "AAPL");
+# plt.plot(stock_daily_return["sp500"], beta * stock_daily_return["sp500"] + alpha, '-', color = 'r');
+# plt.show();
+
+# 연 수익
+rm = stock_daily_return["sp500"].mean() * 252
+print(rm);
+print("---------------------------------");
+
+# 무위험 이자율
+rf = 0;
+
+# CAPL(AAPL)
+ER_AAPL = rf + (beta * (rm-rf));
+print(ER_AAPL);
+print("---------------------------------");
