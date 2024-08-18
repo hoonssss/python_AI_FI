@@ -22,7 +22,8 @@ def portfolio_allocation(df, weights):
     
     df_portfolio["portfolio daily worth in $"] = df_portfolio.drop(columns="Date").sum(axis=1)
     
-    df_portfolio["return"] = df_portfolio["portfolio daily worth in $"].pct_change() * 100
+    #일일수익률 계산 후 누적수익률 계산
+    df_portfolio["return"] = df_portfolio["portfolio daily worth in $"].pct_change() * 100 
     
     df_portfolio["return"].iloc[0] = 0  # 첫 번째 날의 수익률을 0으로 설정
     
@@ -36,7 +37,7 @@ weights = weights / np.sum(weights)
 # 포트폴리오 할당
 df_portfolio = portfolio_allocation(df, weights)
 
-# 누적 수익률 계산
+# 누적 수익률 계산 .iloc[-1] => 마지막 값
 result_aapl = ((df_portfolio["AAPL"].iloc[-1] / df_portfolio["AAPL"].iloc[0]) - 1) * 100
 result_sp500 = ((df_portfolio["sp500"].iloc[-1] / df_portfolio["sp500"].iloc[0]) - 1) * 100
 
