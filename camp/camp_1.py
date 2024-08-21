@@ -73,3 +73,37 @@ rf = 0;
 ER_AAPL = rf + (beta * (rm-rf));
 print(ER_AAPL);
 print("---------------------------------");
+
+# all stock beta calculate
+beta = {};
+alpha = {};
+for i in stock_daily_return.columns:
+    if i != "Date" and i != "sp500":
+        plt.figure(figsize=(10, 5))
+        # 베타와 알파 계산
+        b, a = np.polyfit(stock_daily_return["sp500"], stock_daily_return[i], 1)
+       
+        # 베타와 알파 값을 딕셔너리에 저장
+        beta[i] = b
+        alpha[i] = a
+
+        # 회귀선 플로팅
+        plt.plot(stock_daily_return["sp500"], b * stock_daily_return["sp500"] + a, "-", color="r", label=f"Fit Line: Beta={b:.2f}, Alpha={a:.2f}")
+        
+        # 산점도 플로팅
+        plt.scatter(stock_daily_return["sp500"], stock_daily_return[i], alpha=0.5, label=f"{i} Data")
+        
+        # 레이블 및 제목 설정
+        plt.xlabel("SP500 Daily Return")
+        plt.ylabel(i)
+        plt.title(i + " : SP500")
+        plt.legend()
+        plt.grid(True)
+    
+        # 플롯 표시
+        plt.show()
+
+# 베타와 알파 출력
+print("Beta values:", beta)
+print("Alpha values:", alpha)
+
